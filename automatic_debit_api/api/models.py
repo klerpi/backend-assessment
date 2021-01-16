@@ -7,7 +7,7 @@ class Product(models.Model):
     title = models.CharField(max_length=200)
     notification_email = models.EmailField()
     activation_issued = models.BooleanField(default=False)
-    activation_approved = models.BooleanField()
+    activation_approved = models.BooleanField(null=True, blank=True)
 
     def __str__(self):
         return self.title

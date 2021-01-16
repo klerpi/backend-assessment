@@ -16,10 +16,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r automatic_debit_api/requirements.txt
           pip install flake8
-      - name: Lint the code
-        run: |
-          flake8 --config ".flake8"
+      # - name: Lint the code
+      #   run: |
+      #     flake8 --config ".flake8"
+      - name: Run docker-compose
+        run: docker-compose up
       - name: Run the tests
-        run: |
-          cd automatic_debit_api
-          python3 manage.py test
+        run: docker exec -it automatic_debit_api "python manage.py test"

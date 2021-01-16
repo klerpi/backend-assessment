@@ -4,13 +4,15 @@ from django.contrib.auth.models import User
 from .models import Product
 
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        exclude = ("password",)
-
-
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         exclude = ("user",)
+
+
+class UserSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        exclude = ("password",)

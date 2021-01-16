@@ -4,9 +4,9 @@ services:
   api:
     container_name: automatic_debit_api
     build: 
-      context: ./automatic_debit
+      context: ./automatic_debit_api
     command: "python manage.py runserver 0.0.0.0:8000"
     volumes: 
-      - ./automatic_debit:/app
+      - ./automatic_debit_api:/app
     ports:
       - "8000:8000"

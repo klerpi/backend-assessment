@@ -5,6 +5,16 @@ from ..models import Product
 from ..serializers import ProductSerializer, UserSerializer
 
 
+class UserSerializerTestCase(TestCase):
+    def setUp(self):
+        user = User.objects.create_user("test", "test@python.com", "aGoodPass23")
+        self.user_serializer = UserSerializer(instance=user)
+
+    def test_password_is_not_serialized(self):
+        data = self.user_serializer.data
+        self.assertFalse("password" in data)
+
+
 class ProductSerializerTestCase(TestCase):
     def setUp(self):
         user = User.objects.create_user("test", "test@python.com", "aGoodPass23")

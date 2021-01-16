@@ -8,8 +8,10 @@ db.sqlite3
 db.sqlite3-journal
 media
 
+# PostgreSQL
+postgres-data/
+
 # Environments
-.env
 venv/
 
 # Editor

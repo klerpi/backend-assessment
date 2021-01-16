@@ -7,7 +7,6 @@ from ..models import Product
 class ProductTestCase(TestCase):
     def setUp(self):
         user = User.objects.create_user("test", "test@python.com", "aGoodPass23")
-        user.save()
 
         Product.objects.create(
             user=user, title="Example Product", notification_email="test@product.com"

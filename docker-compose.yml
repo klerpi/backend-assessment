@@ -3,13 +3,21 @@ version: "3"
 services: 
   api:
     container_name: automatic_debit_api
+    env_file: ./.env
     build: 
       context: ./automatic_debit_api
     command: "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASS=${POSTGRES_PASSWORD}
     volumes: 
       - ./automatic_debit_api:/app
     ports:
       - "8000:8000"
+    depends_on: 
+      - db
   
   db:
     container_name: api_database

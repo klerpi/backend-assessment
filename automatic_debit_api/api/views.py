@@ -5,18 +5,24 @@ from .models import Product
 from .serializers import ProductSerializer
 
 
+# Helper function
+def get_full_queryset_if_superuser(user):
+    """
+    Returns the full queryset if the current user is a superuser
+    Otherwise, it returns only products created by the current user
+    """
+    if user.is_superuser:
+        return Product.objects.all()
+    else:
+        return Product.objects.filter(user=user)
+
+
 class ProductListAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
         current_user = self.request.user
-
-        # If the current user is a super user, they see all the products
-        # If the current user is a normal user, they only see products they created
-        if current_user.is_superuser:
-            return Product.objects.all()
-        else:
-            return Product.objects.filter(user=current_user)
+        return get_full_queryset_if_superuser(current_user)
 
     def perform_create(self, serializer):
         # Overload needed to bind the new Product to current user

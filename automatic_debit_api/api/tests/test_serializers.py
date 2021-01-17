@@ -32,13 +32,12 @@ class ProductSerializerTestCase(TestCase):
         """
         Certifies the serialized content is what's expected
         """
+        data = self.product_serializer.data
         expected_data = {
-            "id": 1,
+            "id": data["id"],
             "title": "Example Product",
             "notification_email": "test@product.com",
             "activation_issued": False,
             "activation_approved": None,
         }
-        data = self.product_serializer.data
-
         self.assertEqual(data, expected_data)

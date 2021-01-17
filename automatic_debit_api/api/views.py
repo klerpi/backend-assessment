@@ -21,8 +21,7 @@ class ProductListAPIView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
 
     def get_queryset(self):
-        current_user = self.request.user
-        return get_full_queryset_if_superuser(current_user)
+        return get_full_queryset_if_superuser(self.request.user)
 
     def perform_create(self, serializer):
         """

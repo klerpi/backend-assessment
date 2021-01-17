@@ -20,13 +20,40 @@ def toggle_activation_issued(user, product, new_value):
     """
     Sets the activation_issued property to new_value and returns the Response object
     Property is only set if the current user is the author of the product or a superuser
-    Otherwise an error message is sent instead
+    Otherwise an error message is sent
     """
     if user == product.user or user.is_superuser:
         product.activation_issued = new_value
         product.save()
         serializer = ProductSerializer(instance=product)
         return Response(serializer.data)
+    else:
+        return Response(
+            {
+                "message": "You need to be the author of the product or a superuser to do this"
+            },
+            status=status.HTTP_403_FORBIDDEN,
+        )
+
+
+def toggle_activation_approved(user, product, new_value):
+    """
+    Sets the activation_approved property to new_value and returns the Response object
+    Property is only set if the current user is a superuser and the current value is None
+    If the current value is not None a message is returned
+    If the current user is not a superuser an error message is sent
+    """
+    if user.is_superuser:
+        if product.activation_approved is None:
+            product.activation_approved = new_value
+            product.save()
+            serializer = ProductSerializer(instance=product)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {"message": "This product was already approved or rejected"},
+                status=status.HTTP_409_CONFLICT,
+            )
     else:
         return Response(
             {

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import (
+from .views.external_app_views import (
     ProductListAPIView,
     ProductDetailAPIView,
     ProductActivationRequestAPIView,

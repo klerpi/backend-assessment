@@ -8,7 +8,7 @@ from .views.external_app_views import (
     PendingProductsAPIView,
 )
 
-from .views.superuser_views import ApproveProductAPIView
+from .views.superuser_views import ApproveProductAPIView, RejectProductAPIView
 
 urlpatterns = [
     path("products/", ProductListAPIView.as_view(), name="product_list"),
@@ -32,5 +32,10 @@ urlpatterns = [
         "products/<int:pk>/approve/",
         ApproveProductAPIView.as_view(),
         name="product_approve",
+    ),
+    path(
+        "products/<int:pk>/reject/",
+        RejectProductAPIView.as_view(),
+        name="product_reject",
     ),
 ]

@@ -31,3 +31,10 @@ class ProductListAPIView(generics.ListCreateAPIView):
         user_pk = self.request.user.id
         user = generics.get_object_or_404(User, pk=user_pk)
         serializer.save(user=user)
+
+
+class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        return get_full_queryset_if_superuser(self.request.user)

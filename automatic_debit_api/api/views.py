@@ -25,7 +25,9 @@ class ProductListAPIView(generics.ListCreateAPIView):
         return get_full_queryset_if_superuser(current_user)
 
     def perform_create(self, serializer):
-        # Overload needed to bind the new Product to current user
+        """
+        Binds the new product to the current user
+        """
         user_pk = self.request.user.id
         user = generics.get_object_or_404(User, pk=user_pk)
         serializer.save(user=user)

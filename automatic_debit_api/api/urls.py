@@ -4,6 +4,7 @@ from .views.external_app_views import (
     ProductListAPIView,
     ProductDetailAPIView,
     ProductActivationRequestAPIView,
+    ProductActivationCancelationAPIView,
 )
 
 urlpatterns = [
@@ -13,5 +14,10 @@ urlpatterns = [
         "products/<int:pk>/activate/",
         ProductActivationRequestAPIView.as_view(),
         name="product_activate",
+    ),
+    path(
+        "products/<int:pk>/cancel/",
+        ProductActivationCancelationAPIView.as_view(),
+        name="product_cancel",
     ),
 ]

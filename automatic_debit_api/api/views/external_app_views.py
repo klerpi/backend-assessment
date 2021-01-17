@@ -36,3 +36,9 @@ class ProductActivationRequestAPIView(views.APIView):
     def post(self, request, pk=None):
         product = generics.get_object_or_404(Product, pk=pk)
         return toggle_activation_issued(request.user, product, new_value=True)
+
+
+class ProductActivationCancelationAPIView(views.APIView):
+    def post(self, request, pk=None):
+        product = generics.get_object_or_404(Product, pk=pk)
+        return toggle_activation_issued(request.user, product, new_value=False)

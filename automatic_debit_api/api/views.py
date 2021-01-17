@@ -62,10 +62,6 @@ class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class ProductActivationRequestAPIView(views.APIView):
     def post(self, request, pk=None):
-        """
-        Sets the activation_issued property to True in a Product instance
-        The caller is only allowed to set it if it's the creator or if it's a superuser
-        """
         product = generics.get_object_or_404(Product, pk=pk)
         return toggle_activation_issued_if_author_or_superuser(
             request.user, product, new_value=True

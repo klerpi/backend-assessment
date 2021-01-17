@@ -42,3 +42,15 @@ class ProductActivationCancelationAPIView(views.APIView):
     def post(self, request, pk=None):
         product = generics.get_object_or_404(Product, pk=pk)
         return toggle_activation_issued(request.user, product, new_value=False)
+
+
+class PendingProductsAPIView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        """
+        Filters the queryset even further by showing only the
+        products with activation_issued equal to true
+        """
+        initial_set = get_full_queryset_if_superuser(self.request.user)
+        return initial_set.filter(activation_issued=True)

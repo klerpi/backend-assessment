@@ -5,6 +5,7 @@ from .views.external_app_views import (
     ProductDetailAPIView,
     ProductActivationRequestAPIView,
     ProductActivationCancelationAPIView,
+    PendingProductsAPIView,
 )
 
 urlpatterns = [
@@ -19,5 +20,10 @@ urlpatterns = [
         "products/<int:pk>/cancel/",
         ProductActivationCancelationAPIView.as_view(),
         name="product_cancel",
+    ),
+    path(
+        "products/pending/",
+        PendingProductsAPIView.as_view(),
+        name="product_pending_list",
     ),
 ]

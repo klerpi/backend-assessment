@@ -50,7 +50,13 @@ class PendingProductsAPIView(generics.ListAPIView):
     def get_queryset(self):
         """
         Filters the queryset even further by showing only the
-        products with activation_issued equal to true
+        products with activation_issued equal to true and
+        products not yet approved or rejected
         """
+        # Get full queryset if super user or user specific
         initial_set = get_full_queryset_if_superuser(self.request.user)
-        return initial_set.filter(activation_issued=True)
+        # Get only issued products
+        issued_set = initial_set.filter(activation_issued=True)
+        # Get only non-approved and non-rejected products
+        final_set = issued_set.filter(activation_approved__isnull=True)
+        return final_set

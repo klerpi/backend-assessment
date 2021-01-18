@@ -11,6 +11,7 @@ services:
              python manage.py migrate &&
              python manage.py runserver 0.0.0.0:8000"
     environment:
+      - SECRET_KEY=${SECRET_KEY}
       - DB_HOST=${DB_HOST}
       - DB_NAME=${POSTGRES_DB}
       - DB_USER=${POSTGRES_USER}

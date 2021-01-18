@@ -35,8 +35,14 @@ The project is set up in a way where the first run creates a superuser to facili
 Those are the credentials:
 
 ```
-User: root
+Username: root
 Password: root
+```
+
+The initialization also creates a regular user for testing with the following credentials:
+```
+Username: user
+Password: user
 ```
 
 More details about credentials and other secrets can be found in the `.env` file (only in the repo because it's an assessment).

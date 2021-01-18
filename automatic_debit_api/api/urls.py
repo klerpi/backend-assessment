@@ -19,7 +19,6 @@ urlpatterns = [
     # Auth
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
     # API Views
     path("products/", ProductListAPIView.as_view(), name="product_list"),
     path("products/<int:pk>/", ProductDetailAPIView.as_view(), name="product_detail"),

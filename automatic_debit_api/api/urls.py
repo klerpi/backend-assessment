@@ -1,4 +1,9 @@
 from django.urls import path
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView,
+)
 
 from .views.external_app_views import (
     ProductListAPIView,
@@ -11,6 +16,11 @@ from .views.external_app_views import (
 from .views.superuser_views import ApproveProductAPIView, RejectProductAPIView
 
 urlpatterns = [
+    # Auth
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("token/verify/", TokenVerifyView.as_view(), name="token_verify"),
+    # API Views
     path("products/", ProductListAPIView.as_view(), name="product_list"),
     path("products/<int:pk>/", ProductDetailAPIView.as_view(), name="product_detail"),
     path(

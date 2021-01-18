@@ -140,3 +140,44 @@ class ProductActivationAndCancelationAPITestCase(APITestCase):
         self.assertEqual(get_resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
         self.assertEqual(post_resp.status_code, status.HTTP_200_OK)
         self.assertFalse(post_resp.data["activation_issued"])
+
+
+class PendingProductsAPITestCase(APITestCase):
+    def setUp(self):
+        user = User.objects.create_user("test", "test@python.com", "aGoodPass24")
+        self.client.force_authenticate(user=user)  # Default logged in user
+
+        product_attributes = {
+            "user": user,
+            "title": "Example Product",
+            "notification_email": "test@product.com",
+        }
+        self.product = Product.objects.create(**product_attributes)
+
+    def test_product_appearing_after_activation(self):
+        # Activate the product
+        self.client.post(reverse("product_activate", kwargs={"pk": self.product.id}))
+        # Get pending list
+        response = self.client.get(reverse("product_pending_list"))
+
+        expected_data = [
+            {
+                "id": self.product.id,
+                "title": "Example Product",
+                "notification_email": "test@product.com",
+                "activation_issued": True,
+                "activation_approved": None,
+            }
+        ]
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["results"], expected_data)
+
+    def test_product_not_appearing_after_cancelation(self):
+        # Cancel the product
+        self.client.post(reverse("product_cancel", kwargs={"pk": self.product.id}))
+        # Get pending list
+        response = self.client.get(reverse("product_pending_list"))
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["results"], [])

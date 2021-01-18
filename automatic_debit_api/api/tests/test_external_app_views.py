@@ -22,7 +22,7 @@ class ProductListAPITestCase(APITestCase):
     def test_unauthorized_access(self):
         self.client.force_authenticate(user=None)  # Logs out
         response = self.client.get(reverse("product_list"))
-        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_authorized_access(self):
         response = self.client.get(reverse("product_list"))

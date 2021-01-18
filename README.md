@@ -47,7 +47,8 @@ The root of the API is located in `http://localhost:8000/api/v1/`. The following
 
 ### Authentication (JWT)
 
-#### /token
+#### /token/
+Get an "access" and a "refresh" token to make requests with.
 
 Request
 ```http
@@ -69,7 +70,8 @@ Response
 }
 ```
 
-#### /token/refresh
+#### /token/refresh/
+Uses your "refresh" token to generate a new "access" one.
 
 Request
 ```http

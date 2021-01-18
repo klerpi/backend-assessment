@@ -234,3 +234,45 @@ Response
     ]
 }
 ```
+
+## Superuser endpoints
+
+Endpoints only a superuser can call.
+
+### POST /products/\<id\>/approve/
+Approves the user's request. A product can only be accepted or rejected once.
+
+Request
+```http
+POST http://localhost:8000/api/v1/products/3/approve/
+```
+
+Response
+```json
+{
+    "id": 3,
+    "title": "A new product approaches",
+    "notification_email": "hello@example.com",
+    "activation_issued": true,
+    "activation_approved": true // now true
+}
+```
+
+### POST /products/\<id\>/reject/
+Rejects the user's request. A product can only be accepted or rejected once.
+
+Request
+```http
+POST http://localhost:8000/api/v1/products/3/reject/
+```
+
+Response
+```json
+{
+    "id": 3,
+    "title": "A new product approaches",
+    "notification_email": "hello@example.com",
+    "activation_issued": true,
+    "activation_approved": false // now false
+}
+```

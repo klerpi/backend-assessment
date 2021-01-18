@@ -4,7 +4,7 @@ Backend challenge for interview process of the Junior Backend Dev position at T1
 
 ## Instructions
 
-The instructions for the challenge can be found [here](Instructions.md).
+The instructions for the challenge can be found [here](instructions.md).
 
 ## The solution
 

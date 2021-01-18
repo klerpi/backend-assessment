@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from ..models import Product
+
 
 class ProductListAPITestCase(APITestCase):
     def setUp(self):
@@ -49,3 +51,55 @@ class ProductListAPITestCase(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(data, self.empty_response)
+
+
+class ProductDetailAPITestCase(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user("test", "test@python.com", "aGoodPass24")
+
+        self.product_attributes = {
+            "user": self.user,
+            "title": "Example Product",
+            "notification_email": "test@product.com",
+        }
+        self.product = Product.objects.create(**self.product_attributes)
+
+        self.client.force_authenticate(user=self.user)  # Default logged in user
+
+        self.expected_data = {
+            "id": self.product.id,
+            "title": "Example Product",
+            "notification_email": "test@product.com",
+            "activation_issued": False,
+            "activation_approved": None,
+        }
+
+    def test_product_details_retrieved(self):
+        response = self.client.get(
+            reverse("product_detail", kwargs={"pk": self.product.id})
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, self.expected_data)
+
+    def test_product_update(self):
+        self.expected_data["title"] = "The title changed!"
+
+        response = self.client.put(
+            reverse("product_detail", kwargs={"pk": self.product.id}),
+            self.expected_data,
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data["title"], self.expected_data["title"])
+
+    def test_product_delete(self):
+        delete_resp = self.client.delete(
+            reverse("product_detail", kwargs={"pk": self.product.id})
+        )
+        get_resp = self.client.get(
+            reverse("product_detail", kwargs={"pk": self.product.id})
+        )
+
+        self.assertEqual(delete_resp.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertEqual(get_resp.status_code, status.HTTP_404_NOT_FOUND)

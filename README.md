@@ -90,3 +90,63 @@ Response
     "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEwOTkyMTUwLCJqdGkiOiI5OTRkZGFiZmNlNzM0Njk2OWQzYjE0N2VhMGQzZTY1YiIsInVzZXJfaWQiOjF9.QcjZF7akrOYTM0reSBYpzf9jvbdcv60K7-3N0qcBWqs"
 }
 ```
+
+### Reminder!
+
+You'll need the `Authorization` header with `Bearer <access_token>` to request the following endpoints.
+
+### Regular user endpoints
+
+Endpoints any user can call. 
+
+#### GET /products/
+Requests the list of products created by the current user (or every product if the user is a superuser).
+
+Request
+```http
+GET http://localhost:8000/api/v1/products/
+```
+
+Response
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 1,
+            "title": "Example Product",
+            "notification_email": "example@example.com",
+            "activation_issued": false,
+            "activation_approved": null
+        }
+    ]
+}
+```
+
+#### POST /products/
+Allows the user to create a new product.
+
+Request
+```http
+POST http://localhost:8000/api/v1/products/
+```
+
+```json
+{
+    "title": "Example Product 2",
+    "notification_email": "newexample@example.com"
+}
+```
+
+Response
+```json
+{
+    "id": 2,
+    "title": "Example Product 2",
+    "notification_email": "newexample@example.com",
+    "activation_issued": false,
+    "activation_approved": null
+}
+```

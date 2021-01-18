@@ -6,7 +6,10 @@ services:
     env_file: ./.env
     build: 
       context: ./automatic_debit_api
-    command: "python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python manage.py wait_for_database &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=${DB_HOST}
       - DB_NAME=${POSTGRES_DB}

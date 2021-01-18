@@ -44,3 +44,11 @@ More details about credentials and other secrets can be found in the `.env` file
 ## API Endpoints
 
 See the [full API Reference](api-reference.md) for a documentation of the endpoints.
+
+## Running the tests
+
+The project has a healthy amount of tests (mainly for the view logic). To run them use the following command whilst the containers are running.
+
+```bash
+docker exec -it automatic_debit_api sh -c "python manage.py test"
+```

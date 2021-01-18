@@ -8,7 +8,7 @@ The instructions for the challenge can be found [here](Instructions.md).
 
 ## The solution
 
-The solution leverages Python, Django and the Django Rest Framework to create an API that satisfies the provided use cases. PostgreSQL is the choice for the DMBS.
+The solution leverages Python, Django and the Django Rest Framework to create an API that satisfies the provided use cases. PostgreSQL is the choice for the DBMS.
 
 And, finally, the solution runs in containers using Docker. Docker Compose is used for the container orchestration.
 

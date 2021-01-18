@@ -56,8 +56,8 @@ POST http://localhost:8000/api/v1/token/
 
 ```json
 {
-	"username": "root",
-	"password": "root"
+    "username": "root",
+    "password": "root"
 }
 ```
 

@@ -12,7 +12,7 @@ Request
 POST http://localhost:8000/api/v1/token/
 ```
 
-```json
+```js
 {
     "username": "root",
     "password": "root"
@@ -20,7 +20,7 @@ POST http://localhost:8000/api/v1/token/
 ```
 
 Response
-```json
+```js
 {
     "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxMTA3NzI2NSwianRpIjoiYjZlNTAwOGFhMmEyNGI0YTg1ODQ1ZGIyNDYyMTA0NTYiLCJ1c2VyX2lkIjoxfQ.rZnVL7nO1EC9t3AuRq49cMRqdpq0Czi-X_IJACx3_-0",
     "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEwOTkxNzY1LCJqdGkiOiJhN2FjNzNhYWY4N2E0ZmU1OTYyM2Y2OTMwMGZiYzQwMiIsInVzZXJfaWQiOjF9.waGh8eltC_5B2n463HBQiMGjljdNmWbDEoxVYIajaQ8"
@@ -35,14 +35,14 @@ Request
 POST http://localhost:8000/api/v1/token/refresh/
 ```
 
-```json
+```js
 {
     "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTYxMTA3NzI2NSwianRpIjoiYjZlNTAwOGFhMmEyNGI0YTg1ODQ1ZGIyNDYyMTA0NTYiLCJ1c2VyX2lkIjoxfQ.rZnVL7nO1EC9t3AuRq49cMRqdpq0Czi-X_IJACx3_-0"
 }
 ```
 
 Response
-```json
+```js
 {
     "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjEwOTkyMTUwLCJqdGkiOiI5OTRkZGFiZmNlNzM0Njk2OWQzYjE0N2VhMGQzZTY1YiIsInVzZXJfaWQiOjF9.QcjZF7akrOYTM0reSBYpzf9jvbdcv60K7-3N0qcBWqs"
 }
@@ -65,7 +65,7 @@ GET http://localhost:8000/api/v1/products/
 ```
 
 Response
-```json
+```js
 {
     "count": 1,
     "next": null,
@@ -90,7 +90,7 @@ Request
 POST http://localhost:8000/api/v1/products/
 ```
 
-```json
+```js
 {
     "title": "Example Product 2",
     "notification_email": "newexample@example.com"
@@ -98,7 +98,7 @@ POST http://localhost:8000/api/v1/products/
 ```
 
 Response
-```json
+```js
 {
     "id": 2,
     "title": "Example Product 2",
@@ -117,7 +117,7 @@ GET http://localhost:8000/api/v1/products/2/
 ```
 
 Response
-```json
+```js
 {
     "id": 2,
     "title": "Example Product 2",
@@ -135,7 +135,7 @@ Request
 PUT http://localhost:8000/api/v1/products/2/
 ```
 
-```json
+```js
 {
     "id": 2,
     "title": "New title",
@@ -146,7 +146,7 @@ PUT http://localhost:8000/api/v1/products/2/
 ```
 
 Response
-```json
+```js
 {
     "id": 2,
     "title": "New title",
@@ -178,7 +178,7 @@ POST http://localhost:8000/api/v1/products/3/activate/
 ```
 
 Response
-```json
+```js
 {
     "id": 3,
     "title": "A new product approaches",
@@ -197,7 +197,7 @@ POST http://localhost:8000/api/v1/products/3/cancel/
 ```
 
 Response
-```json
+```js
 {
     "id": 3,
     "title": "A new product approaches",
@@ -218,7 +218,7 @@ GET http://localhost:8000/api/v1/products/pending/
 ```
 
 Response
-```json
+```js
 {
     "count": 1,
     "next": null,
@@ -248,7 +248,7 @@ POST http://localhost:8000/api/v1/products/3/approve/
 ```
 
 Response
-```json
+```js
 {
     "id": 3,
     "title": "A new product approaches",
@@ -267,7 +267,7 @@ POST http://localhost:8000/api/v1/products/3/reject/
 ```
 
 Response
-```json
+```js
 {
     "id": 3,
     "title": "A new product approaches",

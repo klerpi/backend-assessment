@@ -107,3 +107,64 @@ Response
     "activation_approved": null
 }
 ```
+
+### GET /products/\<id\>/
+Gets the data of a particular product if the user is the author or a superuser.
+
+Request
+```http
+GET http://localhost:8000/api/v1/products/2/
+```
+
+Response
+```json
+{
+    "id": 2,
+    "title": "Example Product 2",
+    "notification_email": "newexample@example.com",
+    "activation_issued": false,
+    "activation_approved": null
+}
+```
+
+### PUT /products/\<id\>/
+Updates the data of a particular product if the user is the author or a superuser.
+
+Request
+```http
+PUT http://localhost:8000/api/v1/products/2/
+```
+
+```json
+{
+    "id": 2,
+    "title": "New title",
+    "notification_email": "newexample@example.com",
+    "activation_issued": false,
+    "activation_approved": null
+}
+```
+
+Response
+```json
+{
+    "id": 2,
+    "title": "New title",
+    "notification_email": "newexample@example.com",
+    "activation_issued": false,
+    "activation_approved": null
+}
+```
+
+### DELETE /products/\<id\>/
+Deletes the data of a particular product if the user is the author or a superuser.
+
+Request
+```http
+DELETE http://localhost:8000/api/v1/products/2/
+```
+
+Response
+```http
+HTTP 204 No Content
+```

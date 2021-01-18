@@ -8,6 +8,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         exclude = ("user",)
+        read_only_fields = ("activation_issued", "activation_approved")
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -9,5 +9,8 @@ class Product(models.Model):
     activation_issued = models.BooleanField(default=False)
     activation_approved = models.BooleanField(null=True, blank=True)
 
+    class Meta:
+        ordering = ["-id"]
+
     def __str__(self):
         return self.title

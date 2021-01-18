@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # External apps
+    "django_probes",
     "rest_framework",
     # Internal apps
     "api",

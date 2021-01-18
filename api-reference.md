@@ -168,3 +168,69 @@ Response
 ```http
 HTTP 204 No Content
 ```
+
+### POST /products/\<id\>/activate/
+Issues a product activation request to be reviewed by a superuser.
+
+Request
+```http
+POST http://localhost:8000/api/v1/products/3/activate/
+```
+
+Response
+```json
+{
+    "id": 3,
+    "title": "A new product approaches",
+    "notification_email": "hello@example.com",
+    "activation_issued": true, // switched to true
+    "activation_approved": null
+}
+```
+
+### POST /products/\<id\>/cancel/
+Cancels the product activation and removes it from the pending approvals.
+
+Request
+```http
+POST http://localhost:8000/api/v1/products/3/cancel/
+```
+
+Response
+```json
+{
+    "id": 3,
+    "title": "A new product approaches",
+    "notification_email": "hello@example.com",
+    "activation_issued": false, // switched back to false
+    "activation_approved": null
+}
+```
+
+### GET /products/pending/
+Shows all the pending products to be approved created by the user or every pending product if a superuser.
+
+A product is considered pending if `activation_issued` is `true` and a superuser hasn't approved or rejected yet (`activation_approved` equal to `null`).
+
+Request
+```http
+GET http://localhost:8000/api/v1/products/pending/
+```
+
+Response
+```json
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 3,
+            "title": "A new product approaches",
+            "notification_email": "hello@example.com",
+            "activation_issued": true, // Issued
+            "activation_approved": null // But not yet approved or rejected
+        }
+    ]
+}
+```

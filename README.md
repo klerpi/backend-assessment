@@ -47,7 +47,7 @@ See the [full API Reference](api-reference.md) for a documentation of the endpoi
 
 ## Running the tests
 
-The project has a healthy amount of tests (mainly for the view logic). To run them use the following command whilst the containers are running.
+The project has a healthy amount of tests (mainly for the view logic). To run them, use the following command whilst the containers are running.
 
 ```bash
 docker exec -it automatic_debit_api sh -c "python manage.py test"

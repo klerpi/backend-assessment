@@ -7,4 +7,5 @@ services:
     volumes:
       - ./stress-test:/mnt/locust
     network_mode: host
-    command: -f /mnt/locust/main.py -H http://localhost:8000 # change the port according to the api's port
+    # Important! If you changed the port used for the api, change it in the following line too
+    command: -f /mnt/locust/main.py -H http://localhost:8000 --users 5000 --spawn-rate 20 

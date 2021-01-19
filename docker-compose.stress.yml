@@ -6,6 +6,5 @@ services:
     image: locustio/locust:1.4.1
     volumes:
       - ./stress-test:/mnt/locust
-    ports:
-     - 8089:8089
-    command: -f /mnt/locust/main.py -H http://api:8000 # change the port according to the api's port
+    network_mode: host
+    command: -f /mnt/locust/main.py -H http://localhost:8000 # change the port according to the api's port

@@ -36,7 +36,8 @@ services:
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
     # Idle connections with transactions are terminated in 5 minutes (300000ms)
-    command: postgres -c idle_in_transaction_session_timeout=300000
+    # Other configs from https://docs.djangoproject.com/en/3.1/ref/databases/#optimizing-postgresql-s-configuration
+    command: postgres -c idle_in_transaction_session_timeout=300000 -c client_encoding='UTF8' -c timezone='America/Sao_Paulo'
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}

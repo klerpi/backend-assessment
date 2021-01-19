@@ -1,6 +1,6 @@
 # Backend Assessment
 
-Backend challenge for interview process of the Junior Backend Dev position at T10.
+Backend challenge for the interview process of the Junior Backend Dev position at T10.
 
 ## Instructions
 

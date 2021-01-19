@@ -1,13 +1,15 @@
 import os
 import string
 import random
-from locust import HttpUser, task
+from locust import HttpUser, task, between
 
 
 class WebsiteUser(HttpUser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.auth_header = ""
+
+    wait_time = between(1, 5)
 
     def on_start(self):
         """

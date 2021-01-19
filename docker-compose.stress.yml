@@ -8,11 +8,4 @@ services:
       - ./stress-test:/mnt/locust
     ports:
      - 8089:8089
-    command: -f /mnt/locust/main.py --master -H http://master:8089
-
-  stress_worker:
-    container_name: api_stress_test_worker
-    image: locustio/locust:1.4.1
-    volumes:
-      - ./stress-test:/mnt/locust
-    command: -f /mnt/locust/main.py --worker --master-host master
+    command: -f /mnt/locust/main.py -H http://localhost:8000 # change the port according to the api's port

@@ -2,7 +2,7 @@
 
 The root of the API is located in `http://localhost:8000/api/v1/`. The following endpoints are appended to that URL.
 
-Many of those routes are paginated. This means the responses include a `count`, `next`, `previous` and a `results`. The page size is 10 entries.
+Many of those routes are paginated. This means the responses include a `count`, `next`, `previous` and a `results`. The page size is 5 entries.
 
 ## Authentication (JWT)
 

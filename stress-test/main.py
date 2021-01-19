@@ -4,6 +4,10 @@ from locust import HttpUser, task
 
 class WebsiteUser(HttpUser):
     def on_start(self):
+        """
+        Initialization before starting the tests
+        Gets a token for authorized requests and defines the Authorization header
+        """
         credentials = {
             "username": os.environ.get("DJANGO_SUPERUSER_USERNAME"),
             "password": os.environ.get("DJANGO_SUPERUSER_PASSWORD"),

@@ -35,6 +35,8 @@ services:
     env_file: ./.env
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    # Idle connections with transactions are terminated in 5 minutes (300000ms)
+    command: postgres -c idle_in_transaction_session_timeout=300000
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}

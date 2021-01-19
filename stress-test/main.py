@@ -5,6 +5,10 @@ from locust import HttpUser, task
 
 
 class WebsiteUser(HttpUser):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.auth_header = ""
+
     def on_start(self):
         """
         Initialization before starting the tests

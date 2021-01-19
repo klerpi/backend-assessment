@@ -7,5 +7,9 @@ services:
     volumes:
       - ./stress-test:/mnt/locust
     network_mode: host
+    env_file: ./.env
+    environment:
+      - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
+      - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
     # Important! If you changed the port used for the api, change it in the following line too
     command: -f /mnt/locust/main.py -H http://localhost:8000/api/v1 --users 5000 --spawn-rate 20 

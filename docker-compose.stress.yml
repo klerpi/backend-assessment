@@ -1,0 +1,18 @@
+version: "3"
+
+services: 
+  stress_master:
+    container_name: api_stress_test_master
+    image: locustio/locust:1.4.1
+    volumes:
+      - ./stress-test:/mnt/locust
+    ports:
+     - 8089:8089
+    command: -f /mnt/locust/main.py --master -H http://master:8089
+
+  stress_worker:
+    container_name: api_stress_test_worker
+    image: locustio/locust:1.4.1
+    volumes:
+      - ./stress-test:/mnt/locust
+    command: -f /mnt/locust/main.py --worker --master-host master

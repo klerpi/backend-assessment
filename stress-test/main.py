@@ -58,7 +58,9 @@ class WebsiteUser(HttpUser):
 
     @task
     def get_products(self):
-        self.client.get(url="/products/", headers=self.auth_header)
+        with self.client.get(url="/products/", headers=self.auth_header) as response:
+            if response.status_code == 401:
+                self.refresh_login()
 
     @task
     def new_product(self):
@@ -67,8 +69,10 @@ class WebsiteUser(HttpUser):
             "notification_email": self.get_random_email(),
         }
 
-        self.client.post(
+        with self.client.post(
             url="/products/",
             json=data,
             headers=self.auth_header,
-        )
+        ) as response:
+            if response.status_code == 401:
+                self.refresh_login()

@@ -12,6 +12,7 @@ class WebsiteUser(HttpUser):
             "username": os.environ.get("DJANGO_SUPERUSER_USERNAME"),
             "password": os.environ.get("DJANGO_SUPERUSER_PASSWORD"),
         }
+        self.refresh_token = ""
 
     wait_time = between(1, 5)
 
@@ -20,6 +21,17 @@ class WebsiteUser(HttpUser):
         Gets a token for authorized requests and defines the Authorization header
         """
         with self.client.post("/token/", json=self.credentials) as response:
+            token = response.json()["access"]
+            self.refresh_token = response.json()["refresh"]
+            self.auth_header = {"Authorization": "Bearer " + token}
+
+    def refresh_login(self):
+        """
+        Refreshes expired tokens
+        """
+        body = {"refresh": self.refresh_token}
+
+        with self.client.post("/token/", json=body) as response:
             token = response.json()["access"]
             self.auth_header = {"Authorization": "Bearer " + token}
 

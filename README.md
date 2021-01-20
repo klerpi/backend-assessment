@@ -24,9 +24,11 @@ docker-compose up
 
 Since it's the first run, Docker will download and prepare all the images and containers.
 
-After everything is finished and you see Django message directing you to the localhost URL, you'll be ready to go.
+After everything is finished, when you finally see the message "Starting gunicorn", you'll be ready to go.
 
-The default port used is port 8000, but you can change it in the `docker-compose.yml` file if it's occupied.
+The api will be available at `localhost:8080/api/v1/`, check the [full API Reference](api-reference.md) to see the endpoints you can call.
+
+The default port used is port 8080, but you can change it in the `docker-compose.yml` file if it's occupied (look for the nginx service).
 
 ## Important remarks
 

@@ -10,7 +10,7 @@ services:
       sh -c "python manage.py wait_for_database &&
              python manage.py migrate &&
              python manage.py create-users &&
-             python manage.py runserver 0.0.0.0:8000"
+             gunicorn automatic_debit.wsgi -w 8 -b 0.0.0.0:8000"
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}
@@ -24,8 +24,6 @@ services:
       - DB_PASS=${POSTGRES_PASSWORD}
     volumes: 
       - ./automatic_debit_api:/app
-    ports:
-      - "8000:8000"
     depends_on: 
       - db
   
@@ -35,8 +33,21 @@ services:
     env_file: ./.env
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    # Idle connections with transactions are terminated in 5 minutes (300000ms)
+    # Other configs from https://docs.djangoproject.com/en/3.1/ref/databases/#optimizing-postgresql-s-configuration
+    command: postgres -c idle_in_transaction_session_timeout=300000 -c client_encoding='UTF8' -c timezone='America/Sao_Paulo'
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     restart: always
+  
+  server:
+    container_name: api_server
+    image: nginx:1.19-alpine
+    volumes: 
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on: 
+      - api
+    ports: 
+      - 8080:8080

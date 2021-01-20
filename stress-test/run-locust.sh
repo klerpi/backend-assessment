@@ -1,0 +1,1 @@
+locust -f main.py -H http://localhost:8080/api/v1 --users 5000 --spawn-rate 20

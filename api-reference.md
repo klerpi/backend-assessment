@@ -203,7 +203,10 @@ Response
 ```js
 {
     "id": 3,
-    "url": "http://localhost:8000/api/v1/products/3/"
+    "title": "A new product approaches",
+    "notification_email": "hello@example.com",
+    "activation_issued": false, // switched to false
+    "activation_approved": null
 }
 ```
 

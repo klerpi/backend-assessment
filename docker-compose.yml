@@ -10,7 +10,7 @@ services:
       sh -c "python manage.py wait_for_database &&
              python manage.py migrate &&
              python manage.py create-users &&
-             gunicorn automatic_debit.wsgi -w 4 -b 0.0.0.0:8000"
+             gunicorn automatic_debit.wsgi -w 8 -b 0.0.0.0:8000"
     environment:
       - SECRET_KEY=${SECRET_KEY}
       - DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME}

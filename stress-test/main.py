@@ -31,7 +31,7 @@ class WebsiteUser(HttpUser):
         """
         body = {"refresh": self.refresh_token}
 
-        with self.client.post("/token/", json=body) as response:
+        with self.client.post("/token/refresh/", json=body) as response:
             token = response.json()["access"]
             self.auth_header = {"Authorization": "Bearer " + token}
 

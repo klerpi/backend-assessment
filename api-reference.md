@@ -1,6 +1,6 @@
 # API Reference
 
-The root of the API is located in `http://localhost:8000/api/v1/`. The following endpoints are appended to that URL.
+The root of the API is located in `http://localhost:8080/api/v1/`. The following endpoints are appended to that URL.
 
 Many of those routes are paginated. This means the responses include a `count`, `next`, `previous` and a `results`. The page size is 5 entries.
 
@@ -11,7 +11,7 @@ Get an "access" and a "refresh" token to make requests with.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/token/
+POST http://localhost:8080/api/v1/token/
 ```
 
 ```js
@@ -34,7 +34,7 @@ Uses your "refresh" token to generate a new "access" one.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/token/refresh/
+POST http://localhost:8080/api/v1/token/refresh/
 ```
 
 ```js
@@ -63,7 +63,7 @@ Requests the list of products created by the current user (or every product if t
 
 Request
 ```http
-GET http://localhost:8000/api/v1/products/
+GET http://localhost:8080/api/v1/products/
 ```
 
 Response
@@ -89,7 +89,7 @@ Allows the user to create a new product.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/products/
+POST http://localhost:8080/api/v1/products/
 ```
 
 ```js
@@ -115,7 +115,7 @@ Gets the data of a particular product if the user is the author or a superuser.
 
 Request
 ```http
-GET http://localhost:8000/api/v1/products/2/
+GET http://localhost:8080/api/v1/products/2/
 ```
 
 Response
@@ -134,7 +134,7 @@ Updates the data of a particular product if the user is the author or a superuse
 
 Request
 ```http
-PUT http://localhost:8000/api/v1/products/2/
+PUT http://localhost:8080/api/v1/products/2/
 ```
 
 ```js
@@ -163,7 +163,7 @@ Deletes the data of a particular product if the user is the author or a superuse
 
 Request
 ```http
-DELETE http://localhost:8000/api/v1/products/2/
+DELETE http://localhost:8080/api/v1/products/2/
 ```
 
 Response
@@ -176,7 +176,7 @@ Issues a product activation request to be reviewed by a superuser.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/products/3/activate/
+POST http://localhost:8080/api/v1/products/3/activate/
 ```
 
 Response
@@ -195,7 +195,7 @@ Cancels the product activation and removes it from the pending approvals.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/products/3/cancel/
+POST http://localhost:8080/api/v1/products/3/cancel/
 ```
 
 Response
@@ -216,7 +216,7 @@ A product is considered pending if `activation_issued` is `true` and a superuser
 
 Request
 ```http
-GET http://localhost:8000/api/v1/products/pending/
+GET http://localhost:8080/api/v1/products/pending/
 ```
 
 Response
@@ -246,7 +246,7 @@ Approves the user's request. A product can only be accepted or rejected once.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/products/3/approve/
+POST http://localhost:8080/api/v1/products/3/approve/
 ```
 
 Response
@@ -265,7 +265,7 @@ Rejects the user's request. A product can only be accepted or rejected once.
 
 Request
 ```http
-POST http://localhost:8000/api/v1/products/3/reject/
+POST http://localhost:8080/api/v1/products/3/reject/
 ```
 
 Response

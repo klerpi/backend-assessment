@@ -26,7 +26,7 @@ Since it's the first run, Docker will download and prepare all the images and co
 
 After everything is finished and you see Django message directing you to the localhost URL, you'll be ready to go.
 
-The default port used is port 8000, but you can change it in the `docker-compose.yml` file if it's occupied.
+The default port used is port 8080, but you can change it in the `docker-compose.yml` file if it's occupied.
 
 ## Important remarks
 

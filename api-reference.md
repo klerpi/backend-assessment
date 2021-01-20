@@ -140,7 +140,7 @@ PUT http://localhost:8080/api/v1/products/2/
 ```js
 {
     "id": 2,
-    "title": "Example Product 2",
+    "title": "New title",
     "notification_email": "newexample@example.com",
     "activation_issued": false,
     "activation_approved": null

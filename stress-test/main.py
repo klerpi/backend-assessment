@@ -8,22 +8,26 @@ class WebsiteUser(HttpUser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.auth_header = ""
-
-    wait_time = between(1, 5)
-
-    def on_start(self):
-        """
-        Initialization before starting the tests
-        Gets a token for authorized requests and defines the Authorization header
-        """
-        credentials = {
+        self.credentials = {
             "username": os.environ.get("DJANGO_SUPERUSER_USERNAME"),
             "password": os.environ.get("DJANGO_SUPERUSER_PASSWORD"),
         }
 
-        with self.client.post("/token/", json=credentials) as response:
+    wait_time = between(1, 5)
+
+    def login(self):
+        """
+        Gets a token for authorized requests and defines the Authorization header
+        """
+        with self.client.post("/token/", json=self.credentials) as response:
             token = response.json()["access"]
             self.auth_header = {"Authorization": "Bearer " + token}
+
+    def on_start(self):
+        """
+        Initialization before starting the tests
+        """
+        self.login()
 
     def get_random_string(self):
         """

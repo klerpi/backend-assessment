@@ -24,8 +24,6 @@ services:
       - DB_PASS=${POSTGRES_PASSWORD}
     volumes: 
       - ./automatic_debit_api:/app
-    ports:
-      - "8000:8000"
     depends_on: 
       - db
   

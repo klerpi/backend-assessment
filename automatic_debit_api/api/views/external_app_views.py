@@ -2,7 +2,7 @@ from rest_framework import generics, views
 from django.contrib.auth.models import User
 
 from ..models import Product
-from ..serializers import ProductSerializer, ProductSerializerLinks
+from ..serializers import ProductSerializer
 
 from .view_helpers import (
     get_full_queryset_if_superuser,
@@ -11,18 +11,10 @@ from .view_helpers import (
 
 
 class ProductListAPIView(generics.ListCreateAPIView):
+    serializer_class = ProductSerializer
+
     def get_queryset(self):
         return get_full_queryset_if_superuser(self.request.user)
-
-    def get_serializer_class(self):
-        """
-        If it's a GET request show only the id and url to entry
-        Otherwise, use the full model serializer
-        """
-        if self.request.method == "GET":
-            return ProductSerializerLinks
-        else:
-            return ProductSerializer
 
     def perform_create(self, serializer):
         """
@@ -53,15 +45,7 @@ class ProductActivationCancelationAPIView(views.APIView):
 
 
 class PendingProductsAPIView(generics.ListAPIView):
-    def get_serializer_class(self):
-        """
-        If it's a GET request show only the id and url to entry
-        Otherwise, use the full model serializer
-        """
-        if self.request.method == "GET":
-            return ProductSerializerLinks
-        else:
-            return ProductSerializer
+    serializer_class = ProductSerializer
 
     def get_queryset(self):
         """

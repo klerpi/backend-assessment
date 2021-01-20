@@ -61,8 +61,6 @@ Endpoints any user can call.
 ### GET /products/
 Requests the list of products created by the current user (or every product if the user is a superuser).
 
-To optimize the requests, only the `id` and `url` fields are provided. To get more details about the entry, request the provided url.
-
 Request
 ```http
 GET http://localhost:8000/api/v1/products/
@@ -77,7 +75,10 @@ Response
     "results": [
         {
             "id": 1,
-            "url": "http://localhost:8000/api/v1/products/1/"
+            "title": "Example Product",
+            "notification_email": "example@example.com",
+            "activation_issued": false,
+            "activation_approved": null
         }
     ]
 }
@@ -139,7 +140,7 @@ PUT http://localhost:8000/api/v1/products/2/
 ```js
 {
     "id": 2,
-    "title": "New title",
+    "title": "Example Product 2",
     "notification_email": "newexample@example.com",
     "activation_issued": false,
     "activation_approved": null
@@ -191,8 +192,6 @@ Response
 
 ### POST /products/\<id\>/cancel/
 Cancels the product activation and removes it from the pending approvals.
-
-To optimize the requests, only the `id` and `url` fields are provided. To get more details about the entry, request the provided url.
 
 Request
 ```http

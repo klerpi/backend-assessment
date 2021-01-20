@@ -11,13 +11,6 @@ class ProductSerializer(serializers.ModelSerializer):
         read_only_fields = ("activation_issued", "activation_approved")
 
 
-class ProductSerializerLinks(serializers.Serializer):
-    id = serializers.IntegerField()
-    url = serializers.HyperlinkedIdentityField(
-        view_name="product_detail", lookup_field="pk"
-    )
-
-
 class UserSerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True, read_only=True)
 
